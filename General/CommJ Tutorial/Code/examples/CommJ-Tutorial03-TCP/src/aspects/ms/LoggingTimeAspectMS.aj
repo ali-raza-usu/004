@@ -25,7 +25,8 @@ public aspect LoggingTimeAspectMS extends MultistepConversationAspect {
      		logString = "Multistep : MS Sender: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " [ID = " +_multiStepJP.getConversation()+"] at time "+ sendTime;
      	else
      		logString = "Multistep: MS Sender: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " [ID = " +_multiStepJP.getConversation().getId().toString()+"] at time "+ sendTime;
-		logger.debug(logString);		
+		//hi
+     	logger.debug(logString);		
 		System.out.println(logString);
 	}
 
