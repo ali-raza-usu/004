@@ -8,6 +8,6 @@
 			<attribute name="org.eclipse.ajdt.inpath" value="org.eclipse.ajdt.inpath"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/3rd-party-libs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/3rd-party"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
