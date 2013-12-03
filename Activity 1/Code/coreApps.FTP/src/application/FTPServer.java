@@ -235,7 +235,7 @@ public class FTPServer extends Thread {
 		Message message = null;
 		byte[] bytes = new byte[buffer.remaining()];
 		buffer.get(bytes);
-		message = Encoder.decode(bytes);
+		message = (Message) Encoder.decode(bytes);
 		buffer.clear();
 		buffer = ByteBuffer.wrap(Encoder.encode(message));
 		return message;
