@@ -19,20 +19,18 @@ public aspect VersionOnReceive extends OneWayReceiveAspect{
 	after (ReceiveEventJP _receiveEventJp): ConversationEnd(_receiveEventJp){
      			
 		Message msg =  (Message)Encoder.decode(_receiveEventJp.getBytes());
-     	String logString = "OneWayReceive: Receiver: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " [ID = " +_receiveEventJp.getConversation().getId().toString();
+     	String logString = "OneWayReceive: Receiver: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " ID = " +_receiveEventJp.getConversation().getId().toString();
      	if(msg !=null)
      	{
      		logger.debug(getTargetClass() +"Message is "+ msg.getVersion());
      		
      		if(getTargetClass().equals("FTPClient"))
      		{
-     			logString+="\n"+" The expected version is: 1.0"+ "\n"+"The actual version is:"+msg.getVersion()+ "ID"+ msg.getMessageId()
-     					+ "Response ID"+ msg.getResponseId();
+     			logString+="\n"+" The expected version is: 0.0"+ " The actual version is:"+msg.getVersion();
      		}
      		else if(getTargetClass().equals("FTPServer"))
      		{
-     			logString+="\n"+" The expected version is: 0.0"+ "\n"+"The actual version is:"+msg.getVersion() + "ID"+ msg.getMessageId()
-     					+ "Response ID"+ msg.getResponseId();
+     			logString+="\n"+" The expected version is: 1.0"+ " The actual version is:"+msg.getVersion() ;
      		}
      	}
 		 	
