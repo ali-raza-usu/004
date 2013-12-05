@@ -1,10 +1,1 @@
-23:38:40,408 DEBUG FTPClient.java: 144 - java.lang.ClassCastException: utilities.messages.ver0.FileTransferRequest cannot be cast to utilities.messages.ver1.FileTransferRequest
-	at aspects.ows.VersionOnSend.ajc$around$aspects_ows_VersionOnSend$1$bbaa3c4e(VersionOnSend.aj:24)
-	at baseaspects.communication.OneWaySendAspect.Begin(OneWaySendAspect.aj:32)
-	at baseaspects.communication.OneWaySendAspect.ajc$around$baseaspects_communication_OneWaySendAspect$1$794d6b5(OneWaySendAspect.aj:25)
-	at joinpointracker.MessageJoinPointTracker.SendJoinPoint(MessageJoinPointTracker.aj:244)
-	at joinpointracker.MessageJoinPointTracker.ajc$around$joinpointracker_MessageJoinPointTracker$3$48e97de4(MessageJoinPointTracker.aj:178)
-	at application.FTPClient.coreClient(FTPClient.java:64)
-	at application.FTPClient.run(FTPClient.java:162)
-
-23:38:40,410 DEBUG FTPClient.java: 148 - Client is closing all the connections 
+21:31:02,968 DEBUG FTPClient.java: 102 - File created at E:\IntroductionOfCommJResearch\CommJExperiment\004\Phase 1\Activity 1\Code\coreApps.FTP\paper1.txt
