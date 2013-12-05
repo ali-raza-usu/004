@@ -1,5 +1,0 @@
-1. improve the virulizer for the commJ to be compataible with aspectJ visulizer 
-2. commJ can be a good way to test distributed communications and connections. In particulare, 
-when you have added new advices to monitor the connection and communications points (event)
-3. check the commj's complectness. It should have all types of communications and connections concepts. 
-
