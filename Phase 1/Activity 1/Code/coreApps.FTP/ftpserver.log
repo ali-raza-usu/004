@@ -1,4 +1,0 @@
-22:15:21,545 DEBUG FTPServer.java: 76 - FTP Server Accepted the FTP Client Connection Request
-22:15:26,116 DEBUG FTPServer.java: 110 - Server sent the list of files to the client
-22:15:28,269 DEBUG FTPServer.java: 93 - Server received File Complete Transfer Ack
-22:15:28,269 DEBUG FTPServer.java: 216 - closing connection 
