@@ -1,9 +1,0 @@
- 1- After study the program I notecied the complecity in the code (tangling and scattering). 
-2- after diagnosis the complexity in the reading and writing the message
-3- we decide to use one way receive to change the version of the message ,because that provide modularity of the chanage a version of the message
-	3.1 I checked the type of of receiver
-	3.2 I got the message's data 
-	3.3 I created new message form the type of sender
-	3.4 I put the data of the received message into the new message 
-4- we used one way to send to check the compatablity of the message version
-
