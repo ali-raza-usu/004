@@ -1,0 +1,11 @@
+1. After understaning the code, when decide to make version control message 
+	1.1 I need little changes on the orginal files (core code) to includes them the version message type
+2. Then I decide to create aspects
+	2.1 Because it need to chanage the version of the message and no send receive message in Channels so I have to think of other ways to find use the conversion pointcut in the commJ 
+	2.2 In order to change the version numbers, I need to find a method where the message is created before receiving ----> End Conversion of begin conversation
+	Possible candidates: Encoder.encode , write ---
+	
+		2.2.1	Client is Sending a FTResquest version 1.0 but Server is expecting FTRequest version 0.0
+	
+		2.2.2 I have to get the contents from the existing message and create a 
+	whole new message with the same contents bt a different type and version number.

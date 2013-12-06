@@ -1,3 +1,12 @@
-14:33:22,927 DEBUG FTPServer.java: 78 - FTP Server Accepted the FTP Client Connection Request
-14:33:27,272 DEBUG FTPServer.java: 98 - Server sent the list of files to the client
-14:33:28,516 DEBUG FTPServer.java: 191 - closing connection 
+11:40:24,789 DEBUG FTPServer.java: 76 - FTP Server Accepted the FTP Client Connection Request
+11:40:26,473 DEBUG FTPServer.java: 96 - Server sent the list of files to the client
+11:40:27,916 ERROR FTPServer.java: 185 - java.lang.NullPointerException
+	at aspects.owr.VersionOnReceive.ajc$after$aspects_owr_VersionOnReceive$1$665f5a5d(VersionOnReceive.aj:17)
+	at baseaspects.communication.OneWayReceiveAspect.End(OneWayReceiveAspect.aj:30)
+	at baseaspects.communication.OneWayReceiveAspect.ajc$around$baseaspects_communication_OneWayReceiveAspect$1$fab413ab(OneWayReceiveAspect.aj:23)
+	at joinpointracker.MessageJoinPointTracker.ReceiveJoinPoint(MessageJoinPointTracker.aj:247)
+	at joinpointracker.MessageJoinPointTracker.ajc$after$joinpointracker_MessageJoinPointTracker$1$a8f10751(MessageJoinPointTracker.aj:75)
+	at exp.ftp.FTPServer.coreServer(FTPServer.java:84)
+	at exp.ftp.FTPServer.run(FTPServer.java:42)
+
+11:40:27,917 DEBUG FTPServer.java: 189 - closing connection 

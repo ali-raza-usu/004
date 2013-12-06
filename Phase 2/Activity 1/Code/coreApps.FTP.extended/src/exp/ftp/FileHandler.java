@@ -33,7 +33,7 @@ public class FileHandler {
 
 	private File[] getFilesList() {
 		File[] filesList = null;
-		String path = System.getProperty("user.dir") + "//files//";
+		String path = System.getProperty("user.dir") + "\\files\\";
 
 		try {
 			File file = new File(path);

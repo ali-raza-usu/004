@@ -15,11 +15,10 @@ import java.util.Iterator;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
+import utilities.*;
 import utilities.Encoder;
-import utilities.messages.Message;
-import exp.ftp.messages.FileTransferRequest;
-import exp.ftp.messages.FileTransferResponse;
-
+import utilities.Message;
+import utilities.messages.ver0.*;
 public class FTPServer extends Thread {
 	public FTPServer() {
 
@@ -209,7 +208,7 @@ public class FTPServer extends Thread {
 		Message message = null;
 		byte[] bytes = new byte[buffer.remaining()];
 		buffer.get(bytes);
-		message = Encoder.decode(bytes);
+		message = (Message) Encoder.decode(bytes);
 		buffer.clear();
 		buffer = ByteBuffer.wrap(Encoder.encode(message));
 		return message;

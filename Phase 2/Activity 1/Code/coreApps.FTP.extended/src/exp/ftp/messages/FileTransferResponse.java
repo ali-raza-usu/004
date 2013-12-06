@@ -1,6 +1,6 @@
 package exp.ftp.messages;
 
-import utilities.messages.Message;
+import utilities.Message;
 
 public class FileTransferResponse extends Message {
 

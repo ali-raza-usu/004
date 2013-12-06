@@ -15,10 +15,12 @@ import java.nio.channels.SocketChannel;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
+import utilities.*;
 import utilities.Encoder;
-import utilities.messages.Message;
-import exp.ftp.messages.FileTransferRequest;
-import exp.ftp.messages.FileTransferResponse;
+import utilities.Message;
+//import exp.ftp.messages.FileTransferRequest;
+//import exp.ftp.messages.FileTransferResponse;
+import utilities.messages.ver1.*;
 
 public class FTPClient extends Thread {
 
@@ -177,7 +179,7 @@ public class FTPClient extends Thread {
 		byte[] bytes = new byte[buffer.remaining()];
 		buffer.get(bytes);
 		if (bytes.length > 0) {
-			message = Encoder.decode(bytes);
+			message = (Message) Encoder.decode(bytes);
 			// _logger.debug("Message length is "+ bytes.length +
 			// message.getClass());
 			buffer.clear();
