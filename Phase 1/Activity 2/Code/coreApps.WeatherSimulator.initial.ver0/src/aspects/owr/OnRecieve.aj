@@ -61,7 +61,7 @@ public Message changeToV1(WeatherDataVector data){
 	 {
 		LocType loctype=utilities.messages.ver1.WeatherDataVector.LocType.values()[w.getFacilityLocType().ordinal()];
 		
-		System.out.println(w.getFacilityLocType().ordinal());
+		//System.out.println(w.getFacilityLocType().ordinal());
 		
 		utilities.messages.ver1.WeatherDataVector.ObservationType type=
 				utilities.messages.ver1.WeatherDataVector.ObservationType.values()[w.getFacilityLocType().ordinal()];

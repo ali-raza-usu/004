@@ -179,7 +179,7 @@ public class Receiver extends Thread {
 		byte[] bytes = new byte[buffer.remaining()];
 		buffer.get(bytes);
 		if (bytes.length > 0) {
-			message = Encoder.decode(bytes);
+			message = (Message) Encoder.decode(bytes);
 			buffer.clear();
 			buffer = ByteBuffer.wrap(Encoder.encode(message));
 		}

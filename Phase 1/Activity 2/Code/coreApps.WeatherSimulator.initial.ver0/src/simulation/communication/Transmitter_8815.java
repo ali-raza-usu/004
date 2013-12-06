@@ -17,6 +17,7 @@ import utilities.Encoder;
 import utilities.Message;
 import utilities.messages.WeatherDataRequest;
 import utilities.messages.WeatherDataVector;
+import utilities.messages.ver0.WeatherDataReading;
 
 public class Transmitter_8815 extends Thread {
 
@@ -140,7 +141,7 @@ public class Transmitter_8815 extends Thread {
 		byte[] bytes = new byte[buffer.remaining()];
 		buffer.get(bytes);
 		if (bytes.length > 0) {
-			message = Encoder.decode(bytes);
+			message = (Message) Encoder.decode(bytes);
 			buffer.clear();
 			buffer = ByteBuffer.wrap(Encoder.encode(message));
 		}
