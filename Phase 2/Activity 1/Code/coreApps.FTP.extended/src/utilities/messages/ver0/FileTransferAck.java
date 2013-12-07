@@ -1,8 +1,9 @@
 package utilities.messages.ver0;
 
+import MessageVersion.MessageVersion;
 import utilities.Message;
 
-public class FileTransferAck extends Message {
+public class FileTransferAck extends MessageVersion {
 
 	private String fileIndex = "";
 	private String fileNames = "";

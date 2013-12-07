@@ -1,8 +1,9 @@
 package utilities.messages.ver0;
 
+import MessageVersion.MessageVersion;
 import utilities.Message;
 
-public class FileTransferResponse extends Message {
+public class FileTransferResponse extends MessageVersion {
 
 	private static final long serialVersionUID = 1L;
 
