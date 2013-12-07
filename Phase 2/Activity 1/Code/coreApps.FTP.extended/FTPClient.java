@@ -14,10 +14,9 @@ import java.nio.channels.SocketChannel;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
-
 import utilities.Encoder;
-import utilities.messages.ver1.*;
 import utilities.Message;
+import utilities.messages.ver1.*;
 
 public class FTPClient extends Thread {
 
@@ -111,6 +110,7 @@ public class FTPClient extends Thread {
 							if (_fileTransferResponse.isComplete()) {
 								transferComplete = true;
 								fos.close();
+								break;
 								// _logger.debug("Now transfer is complete quitting the loop");
 							}
 						}
@@ -125,11 +125,11 @@ public class FTPClient extends Thread {
 				}
 			}
 			// _logger.debug("Out of while loop ");
-			FileTransferAck ack = new FileTransferAck(true);
-			_logger.debug("Client is sending File Complete Transfer Ack");
-			buffer.clear();
-			buffer = ByteBuffer.wrap(Encoder.encode(ack));
-			sc.write(buffer);
+			//FileTransferAck ack = new FileTransferAck(true);
+			//_logger.debug("Client is sending File Complete Transfer Ack");
+			//buffer.clear();
+			//buffer = ByteBuffer.wrap(Encoder.encode(ack));
+			//sc.write(buffer);
 			_logger.debug("File Transfer is complete. Now the file is being opened");
 			if (Desktop.isDesktopSupported()) {
 				try {

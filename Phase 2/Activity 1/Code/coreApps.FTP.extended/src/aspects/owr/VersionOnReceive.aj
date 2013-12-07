@@ -55,6 +55,7 @@ public aspect VersionOnReceive extends OneWayReceiveAspect{
 		if((!msg.getVersion().equals(msg.getReceiver_version())) && getTargetClass().equals(FTPServer.class.getSimpleName()))
 		{// server
 			
+			System.out.println("Version on receive  server received "+ msg);
 			if(msg.getClass().getSimpleName().equals(FileTransferRequest.class.getSimpleName())){
 			utilities.messages.ver1.FileTransferRequest requestV1=(utilities.messages.ver1.FileTransferRequest) msg;
 			utilities.messages.ver0.FileTransferRequest requestV0= new utilities.messages.ver0.FileTransferRequest(requestV1.getFileIndex(), requestV1.getFileNames());

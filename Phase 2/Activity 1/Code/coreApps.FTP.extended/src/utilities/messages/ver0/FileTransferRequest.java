@@ -1,9 +1,12 @@
 package utilities.messages.ver0;
 import utilities.MessageVersion;
-import utilities.Message;
 
 public class FileTransferRequest extends MessageVersion {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String fileIndex = "";
 	private String fileNames = "";
 

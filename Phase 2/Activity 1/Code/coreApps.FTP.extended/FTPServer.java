@@ -15,12 +15,9 @@ import java.util.Iterator;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import exp.ftp.FileHandler;
-
 import utilities.Encoder;
-import utilities.messages.ver0.*;
 import utilities.Message;
-
+import utilities.messages.ver0.*;
 public class FTPServer extends Thread {
 	public FTPServer() {
 
@@ -33,7 +30,7 @@ public class FTPServer extends Thread {
 	ByteBuffer buffer = ByteBuffer.allocateDirect(5024);
 	FileHandler _fileHandler = new FileHandler();
 	FileInputStream fis = null;
-	int CHUNK_SIZE = 2000;
+	int CHUNK_SIZE = 1000;
 	private byte[] rdBytes = null;
 	boolean transferComplete = false;
 	private long remainingBytes;
@@ -80,55 +77,35 @@ public class FTPServer extends Thread {
 							client.socket().setTcpNoDelay(true);
 							client.register(sckt_manager, SelectionKey.OP_READ);
 							// REMOVE CODE
-						}
+						}  
 						if (key.isReadable()) {
 							buffer.clear();
-							buffer = ByteBuffer.allocateDirect(5024);
 							client.read(buffer);
 							buffer.flip();
 							_data = (Message) convertBufferToMessage(buffer);
-							// _logger.debug("reading data and converting to message "+
+							// _logger.debug("dfdreading data and converting to message "+
 							// _data);
-							if (_data != null
-									&& _data.getClass().equals(
-											FileTransferAck.class)) {
-								FileTransferAck _fileTransferAck = (FileTransferAck) _data;
-								_logger.debug("Server received File Complete Transfer Ack");
-								if (_fileTransferAck.isComplete()) {
-									transferComplete = true;
-									// break;
-								}
-							} else if (_data != null
-									&& _data.getClass().equals(
-											FileTransferRequest.class)) {
+							if (_data != null&& _data.getClass().equals(FileTransferRequest.class)) {
 								FileTransferRequest _fileTransferRequest = (FileTransferRequest) _data;
 								if (_fileTransferRequest.getFileIndex() == null) {
-									String fileList = _fileHandler
-											.getFileInterfaceStr();
-									FileTransferRequest _request = new FileTransferRequest(
-											null, fileList);
-									buffer = ByteBuffer.wrap(Encoder
-											.encode(_request));
+									String fileList = _fileHandler.getFileInterfaceStr();
+									FileTransferRequest _request = new FileTransferRequest(null, fileList);
+									buffer = ByteBuffer.wrap(Encoder.encode(_request));
 									client.write(buffer);
 									_logger.debug("Server sent the list of files to the client");
 								} else {
-									String fileIndex = _fileTransferRequest
-											.getFileIndex();
-									Integer selectedFileIndx = _fileHandler
-											.processInput(
-													fileIndex,
-													_fileHandler.getFiles().length);
+									String fileIndex = _fileTransferRequest.getFileIndex();
+									System.out.println("Server go the selected file index "+ fileIndex);
+									Integer selectedFileIndx = _fileHandler.processInput(fileIndex,_fileHandler.getFiles().length);
 									if (selectedFileIndx != null) {
 										if (fis == null) {
-											selectedFile = _fileHandler
-													.getFiles()[selectedFileIndx
-													.intValue()];
+											selectedFile = _fileHandler.getFiles()[selectedFileIndx.intValue()];
 											fis = new FileInputStream(selectedFile);
 											remainingBytes = selectedFile.length();
 										}
 										// _logger.debug("In the reading loop !");
-										boolean isFinnished = false;
-										while (!isFinnished) {
+										boolean NoDataChunksLeft = false;
+										while (!NoDataChunksLeft) {
 											if (remainingBytes > CHUNK_SIZE)
 												rdBytes = new byte[CHUNK_SIZE];
 											else
@@ -149,30 +126,25 @@ public class FTPServer extends Thread {
 											if (remainingBytes == 0) {
 												// _logger.debug("Finished sending the file to the client with bytes "+
 												// rdBytes.length);
-												_resp = new FileTransferResponse(
-														selectedFile.getName(),
-														rdBytes, true);
-												isFinnished = true;// breaking
+												transferComplete = true;
+												_resp = new FileTransferResponse(selectedFile.getName(),rdBytes, transferComplete);
+												NoDataChunksLeft = true;// breaking
 																	// out of
 																	// inner
 																	// loop
 											} else {
 												// _logger.debug("sending NOT final chunk");
-												_resp = new FileTransferResponse(
-														selectedFile.getName(),
-														rdBytes, false);
+												_resp = new FileTransferResponse(selectedFile.getName(),rdBytes, false);
 											}
 											// Introduce Random Delays
 											try {
-												int num = 1 + (int) (Math
-														.random() * ((5 - 1) + 1));
+												int num = 1 + (int) (Math.random() * ((5 - 1) + 1));
 												// _logger.debug("Thread is going to sleep for "+
 												// num*100);
 												Thread.sleep(num * 100);
 
 											} catch (Exception e) {
-												_logger.debug(ExceptionUtils
-														.getStackTrace(e));
+												_logger.debug(ExceptionUtils.getStackTrace(e));
 											}
 											// _logger.debug("checking bytes in resp message");
 											if (_resp.getChunkBytes() != null) {
@@ -191,10 +163,8 @@ public class FTPServer extends Thread {
 									} else {
 										FileTransferRequest _fileRequest = new FileTransferRequest(
 												null,
-												_fileHandler
-														.getFileInterfaceStr());
-										buffer = ByteBuffer.wrap(Encoder
-												.encode(_fileRequest));
+												_fileHandler.getFileInterfaceStr());
+										buffer = ByteBuffer.wrap(Encoder.encode(_fileRequest));
 										client.write(buffer);
 										_data = null;
 									}
