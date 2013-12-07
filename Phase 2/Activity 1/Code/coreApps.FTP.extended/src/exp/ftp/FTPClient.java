@@ -14,12 +14,8 @@ import java.nio.channels.SocketChannel;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
-
-import utilities.*;
 import utilities.Encoder;
 import utilities.Message;
-//import exp.ftp.messages.FileTransferRequest;
-//import exp.ftp.messages.FileTransferResponse;
 import utilities.messages.ver1.*;
 
 public class FTPClient extends Thread {

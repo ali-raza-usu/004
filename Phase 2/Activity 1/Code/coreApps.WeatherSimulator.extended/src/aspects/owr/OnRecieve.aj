@@ -42,9 +42,9 @@ public aspect OnRecieve extends OneWayReceiveAspect{
  			{
  				if(getTargetClass().equals("Transmitter_8815") ||getTargetClass().equals("Transmitter_8816"))
  				{
- 				utilities.messages.ver0.WeatherDataRequest requestV0=(utilities.messages.ver0.WeatherDataRequest) msg;
- 				utilities.messages.ver1.WeatherDataRequest requestV1= new utilities.messages.ver1.WeatherDataRequest(requestV0.getReqType());
- 				msg  = requestV1;
+ 				utilities.messages.ver1.WeatherDataRequest requestV1=(utilities.messages.ver1.WeatherDataRequest) msg;
+ 				utilities.messages.ver0.WeatherDataRequest requestV0= new utilities.messages.ver0.WeatherDataRequest(requestV0.getReqType());
+ 				msg  = requestV0;
  				}
  			}
  		}

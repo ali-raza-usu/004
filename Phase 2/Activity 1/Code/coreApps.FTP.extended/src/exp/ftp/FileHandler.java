@@ -12,7 +12,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import exp.ftp.messages.FileTransferResponse;
+import utilities.messages.ver0.FileTransferResponse;
+
 
 public class FileHandler {
 
@@ -33,7 +34,7 @@ public class FileHandler {
 
 	private File[] getFilesList() {
 		File[] filesList = null;
-		String path = System.getProperty("user.dir") + "\\files\\";
+		String path = System.getProperty("user.dir") + "//files//";
 
 		try {
 			File file = new File(path);

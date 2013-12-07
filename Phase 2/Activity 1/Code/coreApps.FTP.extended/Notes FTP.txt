@@ -1,7 +1,0 @@
-File Transfer Applications
-================================
-- Server sends Client the list of files that are avaialbe for download from the client
-- Client sends a file (File Transfer Request) to the Server
-- Server validates the input 
-- It starts the sending of file if it is the right name 
-- It again sends the client the list of files client did not choose the right file
