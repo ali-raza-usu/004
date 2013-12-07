@@ -1,7 +1,5 @@
 package utilities.messages.ver0;
-
-import MessageVersion.MessageVersion;
-import utilities.Message;
+import utilities.MessageVersion;
 
 public class FileTransferAck extends MessageVersion {
 

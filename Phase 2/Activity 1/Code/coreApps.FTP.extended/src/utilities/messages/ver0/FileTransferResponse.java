@@ -1,6 +1,5 @@
 package utilities.messages.ver0;
-
-import MessageVersion.MessageVersion;
+import utilities.MessageVersion;
 import utilities.Message;
 
 public class FileTransferResponse extends MessageVersion {
