@@ -29,12 +29,12 @@ public aspect VersionOnSend extends OneWaySendAspect{
      		{
      			logString+="\n"+" The expected version is: 1.0"+ " The actual version is:"+msg.getVersion();
      		}
-     		else if(getTargetClass().equals("FTPServer"))
+     		if(getTargetClass().equals("FTPServer"))
      		{
      			logString+="\n"+" The expected version is: 0.0"+ " The actual version is:"+msg.getVersion() ;
      		}
      	}
-		 	
+		
      	logger.debug(logString);		
 		System.out.println(logString);
 	}

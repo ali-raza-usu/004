@@ -14,9 +14,11 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
 import utilities.RequestType;
-import utilities.WeatherDataReading;
-import utilities.WeatherDataRequest;
-import utilities.WeatherDataVector;
+import utilities.messages.ver0.WeatherDataReading;
+import utilities.messages.ver0.WeatherDataRequest;
+import utilities.messages.ver0.WeatherDataVector;
+import utilities.messages.ver0.WeatherDataVector.LocType;
+import utilities.messages.ver0.WeatherDataVector.ObservationType;
 import utilities.Encoder;
 import utilities.Message;
 

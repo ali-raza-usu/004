@@ -14,10 +14,16 @@ import java.util.TimerTask;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
+//import utilities.WeatherDataReading;
+//import utilities.WeatherDataRequest;
+//import utilities.WeatherDataVector;
 import utilities.RequestType;
-import utilities.WeatherDataReading;
-import utilities.WeatherDataRequest;
-import utilities.WeatherDataVector;
+import utilities.messages.ver1.*;
+import utilities.messages.ver1.WeatherDataReading;
+import utilities.messages.ver1.WeatherDataRequest;
+import utilities.messages.ver1.WeatherDataVector;
+import utilities.messages.ver1.WeatherDataVector.LocType;
+import utilities.messages.ver1.WeatherDataVector.ObservationType;
 import utilities.Encoder;
 import utilities.Message;
 
