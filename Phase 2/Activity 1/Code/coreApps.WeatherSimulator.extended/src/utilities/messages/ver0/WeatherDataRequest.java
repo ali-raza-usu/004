@@ -5,9 +5,10 @@ import java.util.UUID;
 import org.junit.Test;
 
 import utilities.Message;
+import utilities.MessageVersion;
 import utilities.RequestType;
 
-public class WeatherDataRequest extends Message {
+public class WeatherDataRequest extends MessageVersion {
 
 	private RequestType reqType;
 

@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.junit.Test;
 
 
-public class WeatherDataRequest extends Message implements Serializable {
+public class WeatherDataRequest extends MessageVersion implements Serializable {
 
 	private RequestType reqType;
 
