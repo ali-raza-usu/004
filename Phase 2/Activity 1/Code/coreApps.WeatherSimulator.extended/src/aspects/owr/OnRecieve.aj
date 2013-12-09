@@ -1,95 +1,90 @@
 package aspects.owr;
 
-import java.awt.image.RescaleOp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
+import simulation.communication.*;
+import utilities.messages.ver0.*;
 import joinpoints.communication.ReceiveEventJP;
-import joinpoints.communication.SendEventJP;
+import utilities.MessageVersion;
 import baseaspects.communication.OneWayReceiveAspect;
-import baseaspects.communication.OneWaySendAspect;
-import sun.text.normalizer.UTF16;
 import utilities.Encoder;
-import utilities.Message;
-import utilities.RequestType;
-
 import org.apache.log4j.Logger;
 
-import utilities.messages.ver0.WeatherDataVector;
-import utilities.messages.ver1.WeatherDataReading;
-import utilities.messages.ver1.WeatherDataVector.LocType;
 
-
-public aspect OnRecieve extends OneWayReceiveAspect{
+public aspect OnRecieve extends OneWayReceiveAspect
+{
 	private Logger logger = Logger.getLogger(OnRecieve.class);
-	after (ReceiveEventJP _receiveEventJp):  ConversationEnd(_receiveEventJp){ 
+	after (ReceiveEventJP _receiveEventJp):  ConversationEnd(_receiveEventJp)
 	{
-		Message msg =  (Message)Encoder.decode(_receiveEventJp.getBytes());
+		MessageVersion msg =  (MessageVersion)Encoder.decode(_receiveEventJp.getBytes());
 		String logString = "OneWayReceiver: Receiver: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " ID = " +_receiveEventJp.getConversation().getId().toString();
- 	
-		if(msg.getClass().getSimpleName().equals(utilities.messages.ver0.WeatherDataRequest.class.getSimpleName()))
- 		{
- 			if(msg.getVersion().equals("0.0"))
- 			{
- 				if(getTargetClass().equals("Receiver"))
- 			 	{
- 				utilities.messages.ver1.WeatherDataRequest requestV1=(utilities.messages.ver1.WeatherDataRequest) msg;
- 				utilities.messages.ver0.WeatherDataRequest requestV0= new utilities.messages.ver0.WeatherDataRequest(requestV1.getReqType());
- 				msg  = requestV0;
- 			 	}
- 			}
- 			if(msg.getVersion().equals("1.0"))
- 			{
- 				if(getTargetClass().equals("Transmitter_8815") ||getTargetClass().equals("Transmitter_8816"))
- 				{
- 				utilities.messages.ver1.WeatherDataRequest requestV1=(utilities.messages.ver1.WeatherDataRequest) msg;
- 				utilities.messages.ver0.WeatherDataRequest requestV0= new utilities.messages.ver0.WeatherDataRequest(requestV1.getReqType());
- 				msg  = requestV0;
- 				}
- 			}
- 		}
- 
-	if(msg.getClass().getSimpleName().equals(WeatherDataVector.class.getSimpleName()))
- 	{
- 			if(msg.getVersion().equals("0.0"))
- 			{
- 				if(getTargetClass().equals("Transmitter_8815") ||getTargetClass().equals("Transmitter_8816"))
- 		 		{
- 				utilities.messages.ver0.WeatherDataVector requestV0=(utilities.messages.ver0.WeatherDataVector) msg;
- 				msg=changeToV1(requestV0);
- 		 		}
- 			if(msg.getVersion().equals("1.0"))
- 			{
- 				if(getTargetClass().equals("Receiver"))
- 				{
+		
+		if(msg != null)
+		{	
+			if(msg.getClass().getSimpleName().equals(utilities.messages.ver0.WeatherDataRequest.class.getSimpleName()))
+	 		{
+	 			msg = changeVersion(msg);
+	 		}
+	 
+			if(msg.getClass().getSimpleName().equals(WeatherDataVector.class.getSimpleName()))
+			{
+				msg = changeVersion(msg);
+	 		}
+	 	}
+	 	_receiveEventJp.setBytes(Encoder.encode(msg));
+	 	logString+= "\n"+msg.getClass().getSimpleName()+ "Message Version=" + msg.getVersion().toString();
+	 	logger.debug(logString);		
+		System.out.println(logString);
+	}
+	public MessageVersion changeVersion(MessageVersion msg) 
+	{	
+		if((!msg.getVersion().equals(msg.getReceiver_version())) && 
+				(getTargetClass().equals(Transmitter_8815.class.getSimpleName())|| 
+						(getTargetClass().equals(Transmitter_8816.class.getSimpleName()))))
+		{// server
+			
+			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
+				utilities.messages.ver1.WeatherDataRequest requestV1=(utilities.messages.ver1.WeatherDataRequest) msg;
+				utilities.messages.ver0.WeatherDataRequest requestV0= new utilities.messages.ver0.WeatherDataRequest(requestV1.getReqType());
+				msg  = requestV0;
+			}
+			else if(msg.getClass().getSimpleName().equals(WeatherDataVector.class.getSimpleName())){
  				utilities.messages.ver1.WeatherDataVector requestV1=(utilities.messages.ver1.WeatherDataVector) msg;
- 				msg=changeToV0(requestV1);
- 				}
- 			}
- 			
- 		}
- 	}
- 	_receiveEventJp.setBytes(Encoder.encode(msg));
- 	logString+= "\n"+msg.getClass().getSimpleName()+ "Message Version=" + msg.getVersion().toString();
- 	logger.debug(logString);		
-	System.out.println(logString);
+ 				msg=(MessageVersion) changeToV0(requestV1);
+			}
+		}
+		else if((!msg.getVersion().equals(msg.getReceiver_version())) && 
+				(getTargetClass().equals(Receiver.class.getSimpleName())))
+		{// client
+			
+			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
+				utilities.messages.ver0.WeatherDataRequest requestV0=(utilities.messages.ver0.WeatherDataRequest) msg;
+				utilities.messages.ver1.WeatherDataRequest requestV1= new utilities.messages.ver1.WeatherDataRequest(requestV0.getReqType());
+				msg  = requestV1;
+			}
+			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
+ 				utilities.messages.ver0.WeatherDataVector requestV0=(utilities.messages.ver0.WeatherDataVector) msg;
+ 				msg=(MessageVersion) changeToV1(requestV0);
+			}
+		}
+		
+		return msg;
 	}
-	}
-
 public static String getTargetClass() {
 	StackTraceElement[] elements = Thread.currentThread().getStackTrace();
 	String[] classes = elements[elements.length - 1].getClassName().split("\\.");
 	return classes[classes.length - 1];
 }
 
-public Message changeToV1(WeatherDataVector data){
-	Message masg=new Message();
+public MessageVersion changeToV1(WeatherDataVector data){
+	MessageVersion masg=new MessageVersion();
 	
 	 List<utilities.messages.ver0.WeatherDataReading> weatherDataV0=data.getReadings();
-	 List<utilities.messages.ver1.WeatherDataReading> weatherDataV1=new  ArrayList<WeatherDataReading>();
+	 List<utilities.messages.ver1.WeatherDataReading> weatherDataV1=new  ArrayList<utilities.messages.ver1.WeatherDataReading>();
 	 for(utilities.messages.ver0.WeatherDataReading w: weatherDataV0)
 	 {
-		LocType loctype=utilities.messages.ver1.WeatherDataVector.LocType.values()[w.getFacilityLocType().ordinal()];
+		 utilities.messages.ver1.WeatherDataVector.LocType loctype=utilities.messages.ver1.WeatherDataVector.LocType.values()[w.getFacilityLocType().ordinal()];
 		
 		System.out.println(w.getFacilityLocType().ordinal());
 		
@@ -107,8 +102,8 @@ public Message changeToV1(WeatherDataVector data){
 	return masg;
 }
 
-public Message changeToV0(utilities.messages.ver1.WeatherDataVector data){
-	Message masg=new Message();
+public MessageVersion changeToV0(utilities.messages.ver1.WeatherDataVector data){
+	MessageVersion masg=new MessageVersion();
 	
 	 List<utilities.messages.ver1.WeatherDataReading> weatherDataV1=data.getReadings();
 	 List<utilities.messages.ver0.WeatherDataReading> weatherDataV0=new ArrayList<utilities.messages.ver0.WeatherDataReading>();

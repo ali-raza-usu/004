@@ -1,0 +1,4 @@
+15:17:23,593 ERROR Receiver.java: 123 - java.lang.ClassCastException: utilities.messages.ver0.WeatherDataVector cannot be cast to utilities.messages.ver1.WeatherDataVector
+	at simulation.communication.Receiver.coreReceiver(Receiver.java:103)
+	at simulation.communication.Receiver.run(Receiver.java:166)
+

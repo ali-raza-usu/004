@@ -5,9 +5,10 @@ import java.io.Serializable;
 import org.junit.Test;
 
 import utilities.Message;
+import utilities.MessageVersion;
 import utilities.RequestType;
 
-public class WeatherDataRequest extends Message implements Serializable {
+public class WeatherDataRequest extends MessageVersion implements Serializable {
 
 	private RequestType reqType;
 

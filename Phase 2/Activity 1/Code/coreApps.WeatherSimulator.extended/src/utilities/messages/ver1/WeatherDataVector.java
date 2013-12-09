@@ -6,8 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import utilities.Message;
+import utilities.MessageVersion;
 
-public class WeatherDataVector extends Message implements Serializable {
+public class WeatherDataVector extends MessageVersion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Date msgLog = new Date();

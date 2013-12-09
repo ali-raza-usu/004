@@ -12,24 +12,27 @@ public aspect OnSend extends OneWaySendAspect{
 	
 	private Logger logger = Logger.getLogger(OnSend.class);	
 	
-	after(SendEventJP _sendEventJp): ConversationBegin(_sendEventJp){
-     	Message msg =  (Message)Encoder.decode(_sendEventJp.getBytes());
+	Object around(SendEventJP _sendEventJp): ConversationBegin(_sendEventJp)
+	{		
+		MessageVersion msg =  (MessageVersion)Encoder.decode(_sendEventJp.getBytes());
      	String logString = "OneWaySend: Sender: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " ID = " +_sendEventJp.getConversation().getId().toString();
-     	logger.debug(getTargetClass() +"Message is "+ msg.getVersion());
+     	
      	if(msg !=null)
      	{
 	     	if(getTargetClass().equals("Receiver"))
 	     		{
+	     			msg.setReceiver_version("0.0");
 	     			logString+="\n"+getTargetClass().getClass().getSimpleName()+" Message expected 1.0"+ " The version received is:"+msg.getVersion();
 	     		}
 	     	else if(getTargetClass().equals("Transmitter_8815") || getTargetClass().equals("Transmitter_8815"))
 	     		{
+	     		    msg.setReceiver_version("1.0");
 	     			logString+="\n"+ getTargetClass().getClass().getSimpleName()+
 	     					"Message expected 0.0"+ " The version received is:"+msg.getVersion();
 	     		}
      	}
-     	logger.debug(logString);		
-		System.out.println(logString);
+    	_sendEventJp.setBytes(Encoder.encode(msg));
+		return proceed(_sendEventJp);
 	}
 	
 	public static String getTargetClass() {

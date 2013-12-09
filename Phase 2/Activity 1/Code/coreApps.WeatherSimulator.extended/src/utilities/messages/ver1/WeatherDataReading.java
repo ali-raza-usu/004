@@ -3,10 +3,11 @@ package utilities.messages.ver1;
 import java.util.Date;
 
 import utilities.Message;
+import utilities.MessageVersion;
 import utilities.messages.ver1.WeatherDataVector.LocType;
 import utilities.messages.ver1.WeatherDataVector.ObservationType;
 
-public class WeatherDataReading extends Message {
+public class WeatherDataReading extends MessageVersion {
 
 	private static final long serialVersionUID = 1L;
 	private byte windSpeed; // Miles per hour
