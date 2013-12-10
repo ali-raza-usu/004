@@ -1,4 +1,4 @@
-1. After understaning the code, when decide to make version control message 
+1. After understaning the code, I decide to make version control message 
 	1.1 I need little changes on the orginal files (core code) to includes them the version message type
 2. Then I decide to create aspects
 	2.1 Because it need to chanage the version of the message and no send receive message in Channels so I have to think of other ways to find use the conversion pointcut in the commJ 
@@ -9,3 +9,13 @@
 	
 		2.2.2 I have to get the contents from the existing message and create a 
 	whole new message with the same contents bt a different type and version number.
+3. I have found some of problem in the code design 
+	3.1 control of versions 
+	3.2 swapping versions to be a compatabile 
+	3.3 minor changes in the aplications
+4. CommJ is look like oblivious for the communication things (send/ receive/ read/ write).
+5. I got another problem in the get the traget class
+	1. there is some of dependecy in application-level
+	2. you need to add new variables in the message, so you required to extend the Message class
+6. I have some of debugging problem 
+	If you can add more debugging traker point that could help the developer to debug the application and find the problem, so the developer can extend that tracker and customized it.	
