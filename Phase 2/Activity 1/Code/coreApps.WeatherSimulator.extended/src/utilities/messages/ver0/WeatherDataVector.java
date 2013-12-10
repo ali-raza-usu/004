@@ -24,12 +24,12 @@ public class WeatherDataVector extends MessageVersion implements Serializable {
 	private List<WeatherDataReading> _readings = new ArrayList<WeatherDataReading>();
 
 	public WeatherDataVector(List<WeatherDataReading> _readings) {
-		//this.setVersion("0.0");
+		this.setVersion("0.0");
 		this._readings = _readings;
 	}
 
 	public WeatherDataVector() {
-		//this.setVersion("0.0");
+		this.setVersion("0.0");
 	}
 
 	public List<WeatherDataReading> getReadings() {

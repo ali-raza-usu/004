@@ -84,6 +84,7 @@ public class Transmitter_8816 extends Thread {
 						client = (DatagramChannel) key.channel();
 						if (key.isReadable()) {
 							buffer.clear();
+							buffer = ByteBuffer.allocateDirect(4096);
 							destAddr = client.receive(buffer);
 							// logger.debug("Transmitter " + PortNo +
 							// " : received data from addr: "+destAddr);

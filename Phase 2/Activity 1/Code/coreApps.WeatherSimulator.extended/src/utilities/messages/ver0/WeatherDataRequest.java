@@ -16,7 +16,7 @@ public class WeatherDataRequest extends MessageVersion {
 	private UUID requestId = UUID.randomUUID();
 
 	public WeatherDataRequest(RequestType _type) {
-		//this.setVersion("0.0");
+		this.setVersion("0.0");
 		reqType = _type;
 	}
 

@@ -19,9 +19,6 @@ import org.apache.log4j.Logger;
 //import utilities.WeatherDataVector;
 import utilities.RequestType;
 import utilities.messages.ver1.*;
-import utilities.messages.ver1.WeatherDataReading;
-import utilities.messages.ver1.WeatherDataRequest;
-import utilities.messages.ver1.WeatherDataVector;
 import utilities.messages.ver1.WeatherDataVector.LocType;
 import utilities.messages.ver1.WeatherDataVector.ObservationType;
 import utilities.Encoder;
@@ -86,6 +83,7 @@ public class Receiver extends Thread {
 			// logger.debug("Sending request for Transmitter 2");
 			while (keepRunning) {
 				readBuf.clear();
+				readBuf = ByteBuffer.allocateDirect(4096);
 				SocketAddress addr = dc.receive(readBuf);
 				readBuf.flip();
 				if (readBuf.remaining() > 0) {
@@ -100,6 +98,7 @@ public class Receiver extends Thread {
 							isPktRcvd[1] = true;
 							// logger.debug("received data from Transmitter_1");
 						}
+						System.out.println("debug : Receive mesasge ius "+ _message.getClass());
 						WeatherDataVector _data = (WeatherDataVector) _message;
 						for (WeatherDataReading _reading : _data.getReadings())
 							logger.debug("Rcvd from " + addr.toString()

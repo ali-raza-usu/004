@@ -86,6 +86,7 @@ public class FTPServer extends Thread {
 							buffer = ByteBuffer.allocateDirect(5024);
 							client.read(buffer);
 							buffer.flip();
+							
 							_data = (Message) convertBufferToMessage(buffer);
 							// _logger.debug("reading data and converting to message "+
 							// _data);
@@ -93,6 +94,7 @@ public class FTPServer extends Thread {
 									&& _data.getClass().equals(
 											FileTransferAck.class)) {
 								FileTransferAck _fileTransferAck = (FileTransferAck) _data;
+								System.out.println("sERVER RECEIVES SOME DATA");
 								_logger.debug("Server received File Complete Transfer Ack");
 								if (_fileTransferAck.isComplete()) {
 									transferComplete = true;

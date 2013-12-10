@@ -1,4 +1,35 @@
-15:17:23,593 ERROR Receiver.java: 123 - java.lang.ClassCastException: utilities.messages.ver0.WeatherDataVector cannot be cast to utilities.messages.ver1.WeatherDataVector
-	at simulation.communication.Receiver.coreReceiver(Receiver.java:103)
-	at simulation.communication.Receiver.run(Receiver.java:166)
-
+17:00:46,844 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 99 Temperature 12 Compression Level 
+17:00:46,847 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 4 Temperature 22 Compression Level 
+17:00:46,848 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 18 Temperature 11 Compression Level 
+17:00:46,848 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 88 Temperature 67 Compression Level 
+17:00:46,859 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 17 Temperature 72 Compression Level 
+17:00:46,859 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 117 Temperature 57 Compression Level 
+17:00:46,859 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 122 Temperature 47 Compression Level 
+17:00:46,860 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 109 Temperature 33 Compression Level 
+17:00:47,300 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 88 Temperature 91 Compression Level 
+17:00:47,300 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 100 Temperature 17 Compression Level 
+17:00:47,301 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -108 Temperature 70 Compression Level 
+17:00:47,301 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -70 Temperature 80 Compression Level 
+17:00:47,312 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 84 Temperature 59 Compression Level 
+17:00:47,313 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 57 Temperature 66 Compression Level 
+17:00:47,313 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 47 Temperature 56 Compression Level 
+17:00:47,313 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 79 Temperature 53 Compression Level 
+17:00:47,834 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -80 Temperature 74 Compression Level 
+17:00:47,834 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 92 Temperature 68 Compression Level 
+17:00:47,834 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -97 Temperature 63 Compression Level 
+17:00:47,834 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 58 Temperature 10 Compression Level 
+17:00:47,843 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 99 Temperature 41 Compression Level 
+17:00:47,843 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 108 Temperature 70 Compression Level 
+17:00:47,844 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : -102 Temperature 1 Compression Level 
+17:00:47,844 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : -61 Temperature 53 Compression Level 
+17:00:48,350 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -111 Temperature 63 Compression Level 
+17:00:48,351 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : 4 Temperature 80 Compression Level 
+17:00:48,351 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -66 Temperature 29 Compression Level 
+17:00:48,351 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8815 : Data Speed : -118 Temperature 90 Compression Level 
+17:00:48,358 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 42 Temperature 37 Compression Level 
+17:00:48,358 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 6 Temperature 41 Compression Level 
+17:00:48,359 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 84 Temperature 19 Compression Level 
+17:00:48,359 DEBUG Receiver.java: 104 - Rcvd from /127.0.0.1:8816 : Data Speed : 6 Temperature 90 Compression Level 
+17:00:48,484 DEBUG Receiver.java: 189 - PacketLapse localhost/127.0.0.1:8815 is sending a packet of type STOP...
+17:00:48,634 DEBUG Receiver.java: 189 - PacketLapse localhost/127.0.0.1:8816 is sending a packet of type STOP...
+17:00:48,638 DEBUG Receiver.java: 206 - Now quitting the receiver ....!

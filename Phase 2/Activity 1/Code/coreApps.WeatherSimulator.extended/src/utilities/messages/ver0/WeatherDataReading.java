@@ -27,7 +27,7 @@ public class WeatherDataReading extends MessageVersion {
 	private int resolution; // Not sure?
 
 	public WeatherDataReading() {
-		//this.setVersion("0.0");
+		this.setVersion("0.0");
 	}
 
 	public WeatherDataReading(byte windSpeed, byte windDirection,

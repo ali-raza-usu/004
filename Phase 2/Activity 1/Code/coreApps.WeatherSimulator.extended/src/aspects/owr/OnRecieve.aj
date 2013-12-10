@@ -17,18 +17,22 @@ public aspect OnRecieve extends OneWayReceiveAspect
 	private Logger logger = Logger.getLogger(OnRecieve.class);
 	after (ReceiveEventJP _receiveEventJp):  ConversationEnd(_receiveEventJp)
 	{
+		
 		MessageVersion msg =  (MessageVersion)Encoder.decode(_receiveEventJp.getBytes());
 		String logString = "OneWayReceiver: Receiver: "+getTargetClass() + " - Message "+ msg.getClass().getSimpleName() + " ID = " +_receiveEventJp.getConversation().getId().toString();
 		
 		if(msg != null)
-		{	
+		{
+			System.out.println("debug : message type is "+ msg.getClass());
 			if(msg.getClass().getSimpleName().equals(utilities.messages.ver0.WeatherDataRequest.class.getSimpleName()))
 	 		{
 	 			msg = changeVersion(msg);
 	 		}
+			System.out.println("debug : before entrering Weather data vector");
 	 
 			if(msg.getClass().getSimpleName().equals(WeatherDataVector.class.getSimpleName()))
 			{
+				System.out.println("debug : inside Weather data vector");
 				msg = changeVersion(msg);
 	 		}
 	 	}
@@ -38,12 +42,14 @@ public aspect OnRecieve extends OneWayReceiveAspect
 		System.out.println(logString);
 	}
 	public MessageVersion changeVersion(MessageVersion msg) 
-	{	
+	{
+		System.out.println("debug : MessageVersion  target classs" + getTargetClass() + " receiver msg version "+ msg.getVersion() + "  getReceiver_version "+ (msg.getReceiver_version()));
 		if((!msg.getVersion().equals(msg.getReceiver_version())) && 
 				(getTargetClass().equals(Transmitter_8815.class.getSimpleName())|| 
 						(getTargetClass().equals(Transmitter_8816.class.getSimpleName()))))
 		{// server
 			
+			System.out.println("debug : from receiver " + getTargetClass());
 			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
 				utilities.messages.ver1.WeatherDataRequest requestV1=(utilities.messages.ver1.WeatherDataRequest) msg;
 				utilities.messages.ver0.WeatherDataRequest requestV0= new utilities.messages.ver0.WeatherDataRequest(requestV1.getReqType());
@@ -58,12 +64,13 @@ public aspect OnRecieve extends OneWayReceiveAspect
 				(getTargetClass().equals(Receiver.class.getSimpleName())))
 		{// client
 			
+			System.out.println("debug : from receiver " + getTargetClass());
 			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
 				utilities.messages.ver0.WeatherDataRequest requestV0=(utilities.messages.ver0.WeatherDataRequest) msg;
 				utilities.messages.ver1.WeatherDataRequest requestV1= new utilities.messages.ver1.WeatherDataRequest(requestV0.getReqType());
 				msg  = requestV1;
 			}
-			if(msg.getClass().getSimpleName().equals(WeatherDataRequest.class.getSimpleName())){
+			if(msg.getClass().getSimpleName().equals(WeatherDataVector.class.getSimpleName())){
  				utilities.messages.ver0.WeatherDataVector requestV0=(utilities.messages.ver0.WeatherDataVector) msg;
  				msg=(MessageVersion) changeToV1(requestV0);
 			}
